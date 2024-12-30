@@ -173,7 +173,7 @@ with st.sidebar:
         # Mostrar la cuenta regresiva con días, horas, minutos y segundos
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
-        ⏳ Tiempo restante para 2025: {tiempo_restante.days} días, {tiempo_restante.seconds // 3600} horas, 
+        ⏳ Tiempo restante para 2025: {tiempo_restante.days} día, {tiempo_restante.seconds // 3600} horas, 
         {(tiempo_restante.seconds // 60) % 60} minutos, {tiempo_restante.seconds % 60} segundos.
         </h2>
         """, unsafe_allow_html=True)
