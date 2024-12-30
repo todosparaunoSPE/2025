@@ -162,8 +162,9 @@ with st.sidebar:
     
     # Insertar emojis para mayor interactividad
     st.markdown("🎉 **¡Falta poco para el Año Nuevo!** 🎉")
-    st.image("https://www.w3schools.com/w3images/lights.jpg", caption="¡El Año Nuevo está por llegar!", use_column_width=True)
-    
+    st.image("https://www.w3schools.com/w3images/lights.jpg", caption="¡El Año Nuevo está por llegar!", use_container_width=True)
+
+        
     # Reloj de cuenta regresiva dinámica con segundos
     año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
