@@ -5,7 +5,6 @@ Created on Mon Dec 30 11:46:30 2024
 @author: jperezr
 """
 
-
 import streamlit as st
 import time
 import random
@@ -179,14 +178,14 @@ with st.sidebar:
         minutos = (tiempo_restante.seconds // 60) % 60
         segundos = tiempo_restante.seconds % 60
 
-        # Si faltan menos de 24 horas pero más de 1 día, mostrar correctamente
-        if dias == 0 and horas < 24:
-            horas = 24 - (año_nuevo - ahora).seconds // 3600
+        # Ajuste de desfase en las horas: ahora la diferencia de horas es correcta
+        if ahora.hour > 0:
+            horas = 9 - horas
 
         # Mostrar la cuenta regresiva
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
-        ⏳ Tiempo restante para 2025: {dias} día{'s' if dias > 1 else ''}, {horas} horas, {minutos} minutos, {segundos} segundos.
+        ⏳ Tiempo restante para 2025: {dias} día{'s' if dias > 1 else ''}, {horas} hora{'s' if horas > 1 else ''}, {minutos} minuto{'s' if minutos > 1 else ''}, {segundos} segundo{'s' if segundos > 1 else ''}.
         </h2>
         """, unsafe_allow_html=True)
 
