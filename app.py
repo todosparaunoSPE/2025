@@ -71,7 +71,7 @@ st.markdown(
         }
     }
     </style>
-    <div class="blink">🎊 ¡Un saludo especial para todos mis compañeros de AFORE PENSIONISSSTE! 🎊</div>
+    <div class="blink">🎊 Un cordial saludo a todo el equipo de AFORE PENSIONISSSTE. ¡Gracias por su compromiso y excelente trabajo! 🎊</div>
     """,
     unsafe_allow_html=True
 )
