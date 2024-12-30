@@ -10,6 +10,7 @@ import streamlit as st
 import time
 import random
 import pandas as pd
+import datetime  # Importación correcta del módulo datetime
 import streamlit.components.v1 as components
 
 # Configuración de la página
@@ -162,7 +163,7 @@ with st.sidebar:
     st.header("⏳ Cuenta Regresiva para el Año Nuevo 2025 ⏳")
     
     # Reloj de cuenta regresiva dinámica con segundos
-    año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)
+    año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)  # Uso de datetime importado
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
     while True:
