@@ -13,12 +13,8 @@ import random
 import pandas as pd
 import streamlit.components.v1 as components
 
-
-
 # Configuración de la página
 st.set_page_config(page_title="Feliz Año 2025", page_icon="🎉")
-
-
 
 # Estilo de fondo
 page_bg_img = """
@@ -35,8 +31,6 @@ background-size:16px 16px;
 """
 
 st.markdown(page_bg_img, unsafe_allow_html=True)
-
-
 
 # Título inicial
 st.title("🎉 ¡Bienvenidos! 🎉")
@@ -186,6 +180,50 @@ with st.sidebar:
 
         # Actualizar cada segundo
         time.sleep(1)
+
+    # Pino de Navidad y luces interactivas en el sidebar
+    st.sidebar.markdown("""
+    <style>
+    .tree {
+        width: 150px;
+        height: 200px;
+        position: relative;
+        margin: 0 auto;
+        background: green;
+        border-radius: 50% 50% 0 0;
+    }
+    .tree:before {
+        content: '';
+        width: 30px;
+        height: 30px;
+        background: yellow;
+        border-radius: 50%;
+        position: absolute;
+        top: -10px;
+        left: 60px;
+    }
+    .light {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        position: absolute;
+        background-color: red;
+        animation: blink 1s infinite;
+    }
+    .light:nth-child(odd) { background-color: yellow; }
+    @keyframes blink {
+        0%, 100% { opacity: 0.5; }
+        50% { opacity: 1; }
+    }
+    </style>
+    <div class="tree">
+        <div class="light" style="top: 30px; left: 20px;"></div>
+        <div class="light" style="top: 50px; left: 120px;"></div>
+        <div class="light" style="top: 70px; left: 60px;"></div>
+        <div class="light" style="top: 90px; left: 40px;"></div>
+        <div class="light" style="top: 110px; left: 80px;"></div>
+    </div>
+    """, unsafe_allow_html=True)
 
 # Fondo animado
 st.markdown(
