@@ -4,7 +4,6 @@ Created on Mon Dec 30 11:46:30 2024
 
 @author: jperezr
 """
-
 import streamlit as st
 import time
 import datetime
@@ -14,7 +13,6 @@ import streamlit.components.v1 as components
 
 # Configuración de la página
 st.set_page_config(page_title="Feliz Año 2025", page_icon="🎉")
-
 
 # Estilo de fondo
 page_bg_img = """
@@ -161,6 +159,10 @@ st.info(f"💬 {mensaje_random}")
 # Barra lateral con cuenta regresiva
 with st.sidebar:
     st.header("⏳ Cuenta Regresiva para el Año Nuevo 2025 ⏳")
+    
+    # Insertar emojis para mayor interactividad
+    st.markdown("🎉 **¡Falta poco para el Año Nuevo!** 🎉")
+    st.image("https://www.w3schools.com/w3images/lights.jpg", caption="¡El Año Nuevo está por llegar!", use_column_width=True)
     
     # Reloj de cuenta regresiva dinámica con segundos
     año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)
