@@ -163,37 +163,37 @@ with st.sidebar:
     st.header("⏳ Cuenta Regresiva para el Año Nuevo 2025 ⏳")
     
     # Reloj de cuenta regresiva para la medianoche del 31 de diciembre
-año_nuevo = datetime.datetime(2024, 12, 31, 0, 0, 0)  # Año nuevo: medianoche del 31 de diciembre
+    año_nuevo = datetime.datetime(2024, 12, 31, 0, 0, 0)  # Año nuevo: medianoche del 31 de diciembre
 
-# Contenedor para la cuenta regresiva
-espacio_contador = st.empty()
+    # Contenedor para la cuenta regresiva
+    espacio_contador = st.empty()
 
-# Actualizar la cuenta regresiva cada segundo
-while True:
-    ahora = datetime.datetime.now()  # Hora actual
-    tiempo_restante = año_nuevo - ahora  # Diferencia de tiempo
+    # Actualizar la cuenta regresiva cada segundo
+    while True:
+        ahora = datetime.datetime.now()  # Hora actual
+        tiempo_restante = año_nuevo - ahora  # Diferencia de tiempo
 
-    # Calcular días, horas, minutos y segundos restantes
-    dias = tiempo_restante.days
-    horas = tiempo_restante.seconds // 3600
-    minutos = (tiempo_restante.seconds // 60) % 60
-    segundos = tiempo_restante.seconds % 60
+        # Calcular días, horas, minutos y segundos restantes
+        dias = tiempo_restante.days
+        horas = tiempo_restante.seconds // 3600
+        minutos = (tiempo_restante.seconds // 60) % 60
+        segundos = tiempo_restante.seconds % 60
 
-    # Si faltan menos de 24 horas pero más de 1 día, mostrar correctamente
-    if dias == 0 and horas < 24:
-        dias = 1
+        # Si faltan menos de 24 horas pero más de 1 día, mostrar correctamente
+        if dias == 0 and horas < 24:
+            dias = 1
 
-    # Mostrar la cuenta regresiva
-    espacio_contador.markdown(f"""
-    <h2 style="text-align:center; color: #ff4500;">
-    ⏳ Tiempo restante para 2025: {dias} día{'s' if dias > 1 else ''}, {horas} horas, {minutos} minutos, {segundos} segundos.
-    </h2>
-    """, unsafe_allow_html=True)
+        # Mostrar la cuenta regresiva
+        espacio_contador.markdown(f"""
+        <h2 style="text-align:center; color: #ff4500;">
+        ⏳ Tiempo restante para 2025: {dias} día{'s' if dias > 1 else ''}, {horas} horas, {minutos} minutos, {segundos} segundos.
+        </h2>
+        """, unsafe_allow_html=True)
 
-    # Actualizar cada segundo
-    time.sleep(1)
-    if tiempo_restante.total_seconds() <= 0:
-        break  # Detener el bucle cuando llegue el año nuevo
+        # Actualizar cada segundo
+        time.sleep(1)
+        if tiempo_restante.total_seconds() <= 0:
+            break  # Detener el bucle cuando llegue el año nuevo
 
 # Fondo animado
 st.markdown(
