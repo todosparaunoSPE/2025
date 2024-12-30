@@ -162,7 +162,7 @@ st.info(f"💬 {mensaje_random}")
 with st.sidebar:
     st.header("⏳ Cuenta Regresiva para el Año Nuevo 2025 ⏳")
     
-    # Reloj de cuenta regresiva dinámica con segundos
+    # Fecha de Año Nuevo
     año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)  # Uso de datetime importado
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
@@ -175,7 +175,8 @@ with st.sidebar:
         horas_restantes = tiempo_restante.seconds // 3600
         minutos_restantes = (tiempo_restante.seconds // 60) % 60
         segundos_restantes = tiempo_restante.seconds % 60
-        
+
+        # Mostrar el tiempo restante en la interfaz de Streamlit
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
         ⏳ Tiempo restante para 2025: {dias_restantes} día(s), {horas_restantes} hora(s), 
@@ -183,8 +184,15 @@ with st.sidebar:
         </h2>
         """, unsafe_allow_html=True)
 
-        # Actualizar cada segundo
-        time.sleep(1)
+        # Forzar actualización de la cuenta regresiva
+        time.sleep(1)  # Espera de un segundo antes de actualizar
+
+        # Si el tiempo ha llegado a 0, salir del bucle
+        if tiempo_restante.total_seconds() <= 0:
+            break
+
+        # Reejecutar la cuenta regresiva cada segundo
+        st.experimental_rerun()
 
 # Fondo animado
 st.markdown(
