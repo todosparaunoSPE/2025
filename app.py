@@ -13,6 +13,13 @@ import random
 import pandas as pd
 import streamlit.components.v1 as components
 
+
+
+# Configuración de la página
+st.set_page_config(page_title="Feliz Año 2025", page_icon="🎉")
+
+
+
 # Estilo de fondo
 page_bg_img = """
 <style>
@@ -30,10 +37,6 @@ background-size:16px 16px;
 st.markdown(page_bg_img, unsafe_allow_html=True)
 
 
-
-
-# Configuración de la página
-st.set_page_config(page_title="Feliz Año 2025", page_icon="🎉")
 
 # Título inicial
 st.title("🎉 ¡Bienvenidos! 🎉")
