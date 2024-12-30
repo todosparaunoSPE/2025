@@ -171,10 +171,15 @@ with st.sidebar:
         tiempo_restante = año_nuevo - ahora
 
         # Mostrar la cuenta regresiva con días, horas, minutos y segundos
+        dias_restantes = tiempo_restante.days
+        horas_restantes = tiempo_restante.seconds // 3600
+        minutos_restantes = (tiempo_restante.seconds // 60) % 60
+        segundos_restantes = tiempo_restante.seconds % 60
+        
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
-        ⏳ Tiempo restante para 2025: {tiempo_restante.days} día, {tiempo_restante.seconds // 3600} horas, 
-        {(tiempo_restante.seconds // 60) % 60} minutos, {tiempo_restante.seconds % 60} segundos.
+        ⏳ Tiempo restante para 2025: {dias_restantes} día(s), {horas_restantes} hora(s), 
+        {minutos_restantes} minuto(s), {segundos_restantes} segundo(s).
         </h2>
         """, unsafe_allow_html=True)
 
