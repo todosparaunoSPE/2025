@@ -6,11 +6,13 @@ Created on Mon Dec 30 13:23:50 2024
 """
 
 
+
 import streamlit as st
 import time
 import random
 import pandas as pd
 import datetime
+import pytz
 import streamlit.components.v1 as components
 
 # Configuración de la página
@@ -162,84 +164,27 @@ st.info(f"💬 {mensaje_random}")
 with st.sidebar:
     st.header("⏳ Cuenta Regresiva para el Año Nuevo 2025 ⏳")
     
-    # Fecha de Año Nuevo
-    año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)  # Uso de datetime importado
+    # Zona horaria de Ciudad de México
+    tz = pytz.timezone('America/Mexico_City')
+    
+    # Reloj de cuenta regresiva dinámica con segundos
+    año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0, tzinfo=tz)  # Ajustamos la hora a la zona horaria correcta
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
+    # Actualizar la cuenta regresiva cada segundo
     while True:
-        ahora = datetime.datetime.now()
+        ahora = datetime.datetime.now(tz)  # Usamos la hora actual ajustada a la zona horaria de Ciudad de México
         tiempo_restante = año_nuevo - ahora
 
         # Mostrar la cuenta regresiva con días, horas, minutos y segundos
-        dias_restantes = tiempo_restante.days
-        horas_restantes = tiempo_restante.seconds // 3600
-        minutos_restantes = (tiempo_restante.seconds // 60) % 60
-        segundos_restantes = tiempo_restante.seconds % 60
-
-        # Mostrar el tiempo restante en la interfaz de Streamlit
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
-        ⏳ Tiempo restante para 2025: {dias_restantes} día(s), {horas_restantes} hora(s), 
-        {minutos_restantes} minuto(s), {segundos_restantes} segundo(s).
+        ⏳ Tiempo restante para 2025: {tiempo_restante.days} días, {tiempo_restante.seconds // 3600} horas, 
+        {(tiempo_restante.seconds // 60) % 60} minutos, {tiempo_restante.seconds % 60} segundos.
         </h2>
         """, unsafe_allow_html=True)
 
-        # Forzar actualización de la cuenta regresiva
-        time.sleep(1)  # Espera de un segundo antes de actualizar
-
-        # Si el tiempo ha llegado a 0, salir del bucle
+        # Actualizar cada segundo
+        time.sleep(1)
         if tiempo_restante.total_seconds() <= 0:
-            break
-
-        # Reejecutar la cuenta regresiva cada segundo
-        st.experimental_rerun()
-
-# Fondo animado
-st.markdown(
-    """
-    <style>
-    body {
-        background: radial-gradient(circle, #ffe4e1, #ff4500, #ff6347);
-        animation: background-animation 5s infinite;
-    }
-    @keyframes background-animation {
-        0% {background: #ffe4e1;}
-        50% {background: #ff4500;}
-        100% {background: #ff6347;}
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
-# Pino con tres bolitas que encienden y apagan
-with st.sidebar:
-    st.markdown(""" 
-    <style>
-    .bola {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #ff4500;
-        margin: 10px;
-        animation: blink 1.5s infinite alternate;
-    }
-    .bola:nth-child(2) {
-        animation-delay: 0.5s;
-    }
-    .bola:nth-child(3) {
-        animation-delay: 1s;
-    }
-    @keyframes blink {
-        0% {background-color: #ff4500;}
-        50% {background-color: #ffff00;}
-        100% {background-color: #ff4500;}
-    }
-    </style>
-    <div class="bola"></div>
-    <div class="bola"></div>
-    <div class="bola"></div>
-    """, unsafe_allow_html=True)
-
-# Mensaje final
-st.success(" ¡Que sea un año lleno de éxitos y felicidad para todos!")
+            break  # Detener el bucle cuando llegue el año nuevo
