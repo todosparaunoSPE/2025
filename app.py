@@ -181,7 +181,7 @@ with st.sidebar:
 
         # Si faltan menos de 24 horas pero más de 1 día, mostrar correctamente
         if dias == 0 and horas < 24:
-            dias = 1
+            horas = 24 - (año_nuevo - ahora).seconds // 3600
 
         # Mostrar la cuenta regresiva
         espacio_contador.markdown(f"""
