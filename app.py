@@ -10,7 +10,7 @@ import streamlit as st
 import time
 import random
 import pandas as pd
-import datetime  # Importación correcta del módulo datetime
+import datetime
 import streamlit.components.v1 as components
 
 # Configuración de la página
@@ -199,28 +199,34 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Pino de Navidad en la barra lateral con esferas que se encienden y apagan
+# Pino con tres bolitas que encienden y apagan
 with st.sidebar:
     st.markdown("""
     <style>
-    .tree {
-        font-size: 60px;
-        text-align: center;
-        color: green;
+    .bola {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #ff4500;
+        margin: 10px;
+        animation: blink 1.5s infinite alternate;
     }
-    .tree:before {
-        content: '🎄';
-        display: block;
-        animation: blink 1s steps(5, start) infinite;
+    .bola:nth-child(2) {
+        animation-delay: 0.5s;
+    }
+    .bola:nth-child(3) {
+        animation-delay: 1s;
     }
     @keyframes blink {
-        0% {color: #ff0000;}
-        50% {color: #ff4500;}
-        100% {color: #00ff00;}
+        0% {background-color: #ff4500;}
+        50% {background-color: #ffff00;}
+        100% {background-color: #ff4500;}
     }
     </style>
-    <div class="tree"></div>
+    <div class="bola"></div>
+    <div class="bola"></div>
+    <div class="bola"></div>
     """, unsafe_allow_html=True)
-    
+
 # Mensaje final
 st.success(" ¡Que sea un año lleno de éxitos y felicidad para todos!")
