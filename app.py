@@ -214,7 +214,7 @@ st.markdown(
 
 # Pino con tres bolitas que encienden y apagan
 with st.sidebar:
-    st.markdown("""
+    st.markdown(""" 
     <style>
     .bola {
         width: 30px;
