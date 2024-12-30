@@ -150,7 +150,7 @@ with st.sidebar:
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
     while True:
-        ahora = datetime.datetime.now()
+        ahora = datetime.datetime.now() - datetime.timedelta(hours=9)  # Restar las 9 horas de desfase
         tiempo_restante = año_nuevo - ahora
 
         # Mostrar la cuenta regresiva con días, horas, minutos y segundos
