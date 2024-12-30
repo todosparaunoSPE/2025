@@ -7,29 +7,13 @@ Created on Mon Dec 30 11:46:30 2024
 
 import streamlit as st
 import time
+import datetime
 import random
 import pandas as pd
-import datetime
 import streamlit.components.v1 as components
 
 # Configuración de la página
 st.set_page_config(page_title="Feliz Año 2025", page_icon="🎉")
-
-# Estilo de fondo
-page_bg_img = """
-<style>
-[data-testid="stAppViewContainer"]{
-background:
-radial-gradient(black 15%, transparent 16%) 0 0,
-radial-gradient(black 15%, transparent 16%) 8px 8px,
-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 0 1px,
-radial-gradient(rgba(255,255,255,.1) 15%, transparent 20%) 8px 9px;
-background-color:#282828;
-background-size:16px 16px;
-</style>
-"""
-
-st.markdown(page_bg_img, unsafe_allow_html=True)
 
 # Título inicial
 st.title("🎉 ¡Bienvenidos! 🎉")
@@ -64,7 +48,7 @@ st.markdown(
         }
     }
     </style>
-    <div class="blink">🎊 Un cordial saludo a todo el equipo de AFORE PENSIONISSSTE. ¡Gracias por su compromiso y excelente trabajo! 🎊</div>
+    <div class="blink">🎊 ¡Un saludo especial para todos mis compañeros de AFORE PENSIONISSSTE! 🎊</div>
     """,
     unsafe_allow_html=True
 )
@@ -161,38 +145,24 @@ st.info(f"💬 {mensaje_random}")
 with st.sidebar:
     st.header("⏳ Cuenta Regresiva para el Año Nuevo 2025 ⏳")
     
-    # Reloj de cuenta regresiva para la medianoche del 31 de diciembre
-    año_nuevo = datetime.datetime(2024, 12, 31, 0, 0, 0)  # Año nuevo: medianoche del 31 de diciembre
+    # Reloj de cuenta regresiva dinámica con segundos
+    año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)
+    espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
-    # Contenedor para la cuenta regresiva
-    espacio_contador = st.empty()
-
-    # Actualizar la cuenta regresiva cada segundo
     while True:
-        ahora = datetime.datetime.now()  # Hora actual
-        tiempo_restante = año_nuevo - ahora  # Diferencia de tiempo
+        ahora = datetime.datetime.now()
+        tiempo_restante = año_nuevo - ahora
 
-        # Calcular días, horas, minutos y segundos restantes
-        dias = tiempo_restante.days
-        horas = tiempo_restante.seconds // 3600
-        minutos = (tiempo_restante.seconds // 60) % 60
-        segundos = tiempo_restante.seconds % 60
-
-        # Ajuste de desfase en las horas: ahora la diferencia de horas es correcta
-        if ahora.hour > 0:
-            horas = 9 - horas
-
-        # Mostrar la cuenta regresiva
+        # Mostrar la cuenta regresiva con días, horas, minutos y segundos
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
-        ⏳ Tiempo restante para 2025: {dias} día{'s' if dias > 1 else ''}, {horas} hora{'s' if horas > 1 else ''}, {minutos} minuto{'s' if minutos > 1 else ''}, {segundos} segundo{'s' if segundos > 1 else ''}.
+        ⏳ Tiempo restante para 2025: {tiempo_restante.days} días, {tiempo_restante.seconds // 3600} horas, 
+        {(tiempo_restante.seconds // 60) % 60} minutos, {tiempo_restante.seconds % 60} segundos.
         </h2>
         """, unsafe_allow_html=True)
 
         # Actualizar cada segundo
         time.sleep(1)
-        if tiempo_restante.total_seconds() <= 0:
-            break  # Detener el bucle cuando llegue el año nuevo
 
 # Fondo animado
 st.markdown(
@@ -211,35 +181,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Pino con tres bolitas que encienden y apagan
-with st.sidebar:
-    st.markdown("""
-    <style>
-    .bola {
-        width: 30px;
-        height: 30px;
-        border-radius: 50%;
-        background-color: #ff4500;
-        margin: 10px;
-        animation: blink 1.5s infinite alternate;
-    }
-    .bola:nth-child(2) {
-        animation-delay: 0.5s;
-    }
-    .bola:nth-child(3) {
-        animation-delay: 1s;
-    }
-    @keyframes blink {
-        0% {background-color: #ff4500;}
-        50% {background-color: #ffff00;}
-        100% {background-color: #ff4500;}
-    }
-    </style>
-    <div class="bola"></div>
-    <div class="bola"></div>
-    <div class="bola"></div>
-    """, unsafe_allow_html=True)
 
 # Mensaje final
 st.success(" ¡Que sea un año lleno de éxitos y felicidad para todos!")
