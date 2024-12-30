@@ -150,23 +150,19 @@ with st.sidebar:
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
     while True:
-        ahora = datetime.datetime.now() - datetime.timedelta(hours=6)  # Restar las 6 horas de desfase
+        ahora = datetime.datetime.now() - datetime.timedelta(hours=6)  # Restar las 9 horas de desfase
         tiempo_restante = año_nuevo - ahora
-
-        # Aumentar los minutos en 1
-        minutos = (tiempo_restante.seconds // 60) + 1  # Sumar 1 al cálculo de los minutos
 
         # Mostrar la cuenta regresiva con días, horas, minutos y segundos
         espacio_contador.markdown(f"""
         <h2 style="text-align:center; color: #ff4500;">
         ⏳ Tiempo restante para 2025: {tiempo_restante.days} días, {tiempo_restante.seconds // 3600} horas, 
-        {minutos} minutos, {tiempo_restante.seconds % 60} segundos.
+        {(tiempo_restante.seconds // 60) % 60} minutos, {tiempo_restante.seconds % 60} segundos.
         </h2>
         """, unsafe_allow_html=True)
 
         # Actualizar cada segundo
-        time.sleep(1)
-
+        time.sleep(1) 1.- los minutos como los aumento en 1
 # Fondo animado
 st.markdown(
     """
