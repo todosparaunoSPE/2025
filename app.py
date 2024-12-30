@@ -162,7 +162,8 @@ with st.sidebar:
         """, unsafe_allow_html=True)
 
         # Actualizar cada segundo
-        time.sleep(1) 1.- los minutos como los aumento en 1
+        time.sleep(1)
+
 # Fondo animado
 st.markdown(
     """
