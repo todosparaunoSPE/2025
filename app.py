@@ -10,6 +10,7 @@ import streamlit as st
 import time
 import datetime
 import random
+import pandas as pd
 import streamlit.components.v1 as components
 
 # Configuración de la página
@@ -118,6 +119,19 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+# Mostrar deseos de los usuarios desde Google Sheets
+st.write("---")
+st.header("🎉 Deseos de los usuarios 🎉")
+
+# URL pública de Google Sheets (exportar como CSV)
+SHEET_URL = "https://docs.google.com/spreadsheets/d/1zyENcPfT4waRHuxx5Cs62dd6k87mtHYNQsCU2W6_iI8/export?format=csv"
+
+try:
+    df = pd.read_csv(SHEET_URL)
+    st.dataframe(df)
+except Exception as e:
+    st.error("No se pudieron cargar los deseos de los usuarios. Por favor, verifica la configuración del enlace.")
 
 # Mensajes aleatorios de buenos deseos
 mensajes = [
