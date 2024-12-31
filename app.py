@@ -125,7 +125,7 @@ st.write("---")
 st.header("🎉 Deseos de los usuarios 🎉")
 
 # URL pública de Google Sheets (exportar como CSV)
-SHEET_URL = "https://docs.google.com/spreadsheets/d/1zyENcPfT4waRHuxx5Cs62dd6k87mtHYNQsCU2W6_iI8/edit?resourcekey=&gid=339638114#gid=339638114"
+SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR_TtHo41TwFh7UcVXYo8y1NS_yQ0v9MHSlXO1zmaqZ_UjBQ9gS0vZjjOmISck94W7oFO2syXwDEZ_j/pubhtml"
 
 try:
     df = pd.read_csv(SHEET_URL)
