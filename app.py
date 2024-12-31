@@ -4,11 +4,12 @@ Created on Mon Dec 30 11:46:30 2024
 
 @author: jperezr
 """
+
+
 import streamlit as st
 import time
 import datetime
 import random
-import pandas as pd
 import streamlit.components.v1 as components
 
 # Configuración de la página
@@ -101,24 +102,6 @@ confetti_html = """
 """
 components.html(confetti_html)
 
-# Funcionalidad para guardar deseos en un archivo CSV
-def guardar_deseo(nuevo_deseo):
-    archivo = "deseos.csv"
-    try:
-        # Cargar el archivo CSV si existe
-        df = pd.read_csv(archivo)
-    except FileNotFoundError:
-        # Crear un DataFrame vacío si no existe
-        df = pd.DataFrame(columns=["Deseo"])
-
-    # Agregar el nuevo deseo al DataFrame
-    nuevo_registro = pd.DataFrame({"Deseo": [nuevo_deseo]})
-    df = pd.concat([df, nuevo_registro], ignore_index=True)
-
-    # Guardar los cambios en el archivo CSV
-    df.to_csv(archivo, index=False)
-    return df
-
 # Mostrar video y deseos de los usuarios en la página principal
 st.write("---")
 st.header("🎶 Escucha un mensaje especial 🎶")
@@ -127,23 +110,14 @@ st.audio("buenos_deseos.mp3", format="audio/mp3")
 st.write("---")
 st.header("🎉 ¡Haz tu deseo para el 2025! 🎉")
 
-# Formulario para enviar buenos deseos
-deseo = st.text_input("Escribe tus buenos deseos para el equipo", key="deseos")
-if st.button("Enviar deseo"):
-    if deseo.strip():
-        deseos_actualizados = guardar_deseo(deseo.strip())
-        st.success(f"🎉 ¡Gracias por compartir tu deseo: {deseo}! ")
-    else:
-        st.warning("Por favor, escribe un deseo antes de enviarlo.")
-
-# Mostrar deseos enviados previamente
-try:
-    deseos_previos = pd.read_csv("deseos.csv")
-    if not deseos_previos.empty:
-        st.write("### Deseos enviados por el equipo:")
-        st.table(deseos_previos)
-except FileNotFoundError:
-    st.write("Aún no se han enviado deseos.")
+# Integrar formulario de Google Forms
+st.markdown(
+    """
+    <iframe src="https://docs.google.com/forms/d/e/FORM_ID/viewform?embedded=true" 
+            width="100%" height="800" frameborder="0" marginheight="0" marginwidth="0">Cargando…</iframe>
+    """,
+    unsafe_allow_html=True
+)
 
 # Mensajes aleatorios de buenos deseos
 mensajes = [
@@ -164,13 +138,12 @@ with st.sidebar:
     st.markdown("🎉 **¡Falta poco para el Año Nuevo!** 🎉")
     st.image("https://www.w3schools.com/w3images/lights.jpg", caption="¡El Año Nuevo está por llegar!", use_container_width=True)
 
-        
     # Reloj de cuenta regresiva dinámica con segundos
     año_nuevo = datetime.datetime(2025, 1, 1, 0, 0, 0)
     espacio_contador = st.empty()  # Contenedor para la cuenta regresiva
 
     while True:
-        ahora = datetime.datetime.now() - datetime.timedelta(hours=6)  # Restar las 9 horas de desfase
+        ahora = datetime.datetime.now() - datetime.timedelta(hours=6)  # Restar las 6 horas de desfase
         tiempo_restante = año_nuevo - ahora
 
         # Mostrar la cuenta regresiva con días, horas, minutos y segundos
@@ -183,24 +156,6 @@ with st.sidebar:
 
         # Actualizar cada segundo
         time.sleep(1)
-
-# Fondo animado
-st.markdown(
-    """
-    <style>
-    body {
-        background: radial-gradient(circle, #ffe4e1, #ff4500, #ff6347);
-        animation: background-animation 5s infinite;
-    }
-    @keyframes background-animation {
-        0% {background: #ffe4e1;}
-        50% {background: #ff4500;}
-        100% {background: #ff6347;}
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 
 # Mensaje final
 st.success(" ¡Que sea un año lleno de éxitos y felicidad para todos!")
